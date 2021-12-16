@@ -10,7 +10,7 @@
 #include "soc/rtc_cntl_reg.h"
 
 const char app_name[] = "esp32cam";
-const char ap_password[] = "esp32cam#";
+const char ap_password[] = "esp32cam";
 
 String get_mac_address()
 {
@@ -20,7 +20,8 @@ String get_mac_address()
 	return mac;
 }
 
-auto instance_name = String(app_name) + "-" + get_mac_address();
+//auto instance_name = String(app_name) + "-" + get_mac_address();
+auto instance_name = String(app_name) + "-01";
 
 OV2640 cam;
 espcam_webserver espcam_web(cam, instance_name);
@@ -42,7 +43,7 @@ void setup()
 	digitalWrite(LED_BUILTIN, false);
 
 	log_i("Initialize the camera");
-	esp32cam_aithinker_config.frame_size = FRAMESIZE_UXGA;
+	esp32cam_aithinker_config.frame_size = FRAMESIZE_VGA; 
 	if (cam.init(esp32cam_aithinker_config) != ESP_OK)
 		log_e("Initializing the camera failed");
 
